@@ -24,8 +24,8 @@ export default function Register() {
       await registerUser(form);
       alert("OTP sent to your email 📩");
       navigate("/verify", { state: { email: form.email } });
-    } catch {
-      alert("Registration failed");
+    } catch (err) {
+      alert(err?.response?.data?.message || err?.response?.data || "Registration failed");
     }
   };
 
