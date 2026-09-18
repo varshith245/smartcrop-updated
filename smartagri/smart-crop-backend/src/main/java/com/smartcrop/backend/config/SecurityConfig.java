@@ -59,6 +59,21 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http)
             .requestMatchers("/api/crops/**")
                 .hasAnyRole("ADMIN","FARMER")
 
+            .requestMatchers("/api/market/**")
+                .hasAnyRole("ADMIN","FARMER")
+
+            .requestMatchers("/api/bot/**")
+                .hasAnyRole("ADMIN","FARMER")
+
+            .requestMatchers("/api/water/**")
+                .hasAnyRole("ADMIN","FARMER")
+
+            .requestMatchers("/api/weather/**")
+                .hasAnyRole("ADMIN","FARMER")
+
+            .requestMatchers("/api/soil/**")
+                .hasAnyRole("ADMIN","FARMER")
+
             // ADMIN ONLY
             .requestMatchers("/api/admin/**")
                 .hasRole("ADMIN")

@@ -51,15 +51,31 @@ export default function AdminDiseases() {
               </h2>
 
               <p className="text-gray-300">
-                Disease: <span className="text-white">{d.name}</span>
+                Disease: <span className="text-white font-semibold">{d.diseaseName || d.name || "Unknown"}</span>
               </p>
 
-              <p className="text-gray-300">
+              <p className="text-gray-300 mt-1">
                 Severity:
-                <span className="ml-2 px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300">
-                  {d.severity}
+                <span className={`ml-2 px-3 py-1 rounded-full text-xs font-semibold ${
+                  d.severity === "High" ? "bg-red-500/20 text-red-300 border border-red-500/30" :
+                  d.severity === "Medium" ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30" :
+                  "bg-green-500/20 text-green-300 border border-green-500/30"
+                }`}>
+                  {d.severity || "Low"}
                 </span>
               </p>
+
+              {d.treatment && (
+                <p className="text-xs text-gray-300 mt-3 bg-black/20 p-2.5 rounded-lg">
+                  <span className="text-emerald-300 font-medium">Treatment:</span> {d.treatment}
+                </p>
+              )}
+
+              {d.pesticide && (
+                <p className="text-xs text-gray-300 mt-2 bg-black/20 p-2.5 rounded-lg">
+                  <span className="text-cyan-300 font-medium">Pesticide:</span> {d.pesticide}
+                </p>
+              )}
             </div>
           ))
         )}

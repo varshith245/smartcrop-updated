@@ -16,18 +16,33 @@ public class RecommendationService {
     private final WeatherService weatherService;
 
     public String getRecommendation(Long farmId) {
+        double ph = 6.5;
+        double nitrogen = 45.0;
 
-        SoilData soil = soilService.getByFarm(farmId);
+        try {
+            SoilData soil = soilService.getByFarm(farmId);
+            if (soil != null) {
+                ph = soil.getPh();
+                nitrogen = soil.getNitrogen();
+            }
+        } catch (Exception ignored) {
+            // Safe fallback if farm has not completed a soil test yet
+        }
+
         Weather weather = weatherService.getWeather(farmId);
+        double rainfall = weather != null ? weather.getRainfall() : 250;
+        double temp = weather != null ? weather.getTemperature() : 28;
 
-        if (soil.getPh() < 6.5 &&
-            weather.getRainfall() > 200) {
+        if (ph < 6.5 && rainfall > 200) {
             return "Rice";
         }
 
-        if (soil.getNitrogen() > 50 &&
-            weather.getTemperature() < 30) {
+        if (nitrogen > 50 && temp < 30) {
             return "Wheat";
+        }
+
+        if (ph >= 6.0 && ph <= 7.5 && temp >= 24) {
+            return "Cotton";
         }
 
         return "Maize";
