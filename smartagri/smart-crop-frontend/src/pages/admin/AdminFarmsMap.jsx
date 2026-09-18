@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE } from "../../api/axios";
 
 import {
   MapContainer,
@@ -18,15 +19,14 @@ delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
   iconUrl:
-    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
   shadowUrl:
-    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 export default function AdminFarmsMap() {
-  const [farms, setFarms] = useState([]);
   const [locations, setLocations] = useState([]);
 
   // ================= LOAD FARMS =================
@@ -36,7 +36,7 @@ export default function AdminFarmsMap() {
 
   const loadFarms = async () => {
     const res = await axios.get(
-      "http://localhost:8080/api/admin/farms",
+      `${API_BASE}/admin/farms`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem(

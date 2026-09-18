@@ -1,10 +1,11 @@
 // src/api/irrigation.api.js
 
 import axios from "axios";
+import { API_BASE } from "./axios";
 
 // AXIOS INSTANCE
 const API = axios.create({
-  baseURL: "http://localhost:8080/api/irrigation"
+  baseURL: `${API_BASE}/irrigation`
 });
 
 // ATTACH TOKEN

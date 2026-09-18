@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserByEmail } from "../api/user.api";
 import { getAdminStats } from "../api/admin.api";
+import { API_BASE } from "../api/axios";
 import NotificationPanel from "../components/NotificationPanel";
 import WeatherWidget from "../components/WeatherWidget";
 
@@ -34,7 +35,7 @@ export default function AdminDashboard() {
 
   const downloadReport = (endpoint, filename) => {
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:8080/api/admin/reports/${endpoint}`, {
+    fetch(`${API_BASE}/admin/reports/${endpoint}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

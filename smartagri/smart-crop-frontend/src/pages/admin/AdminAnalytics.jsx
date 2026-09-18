@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE } from "../../api/axios";
 
 export default function AdminAnalytics() {
 
@@ -10,7 +11,7 @@ export default function AdminAnalytics() {
   useEffect(() => {
     const load = async () => {
       const res = await axios.get(
-        "http://localhost:8080/api/admin/yield/analytics",
+        `${API_BASE}/admin/yield/analytics`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`

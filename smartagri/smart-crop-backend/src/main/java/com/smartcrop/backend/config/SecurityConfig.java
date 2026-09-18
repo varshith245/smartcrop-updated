@@ -94,15 +94,21 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http)
 
     return http.build();
 }
+    @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins:http://localhost:5173,http://localhost:3000,https://*.onrender.com}")
+    private String allowedOrigins;
+
     // 🌍 Global CORS
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOriginPatterns(
-            List.of("http://localhost:5173")
-        );
+        List<String> origins = java.util.Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .toList();
+
+        config.setAllowedOriginPatterns(origins);
 
         config.setAllowedMethods(
             List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")

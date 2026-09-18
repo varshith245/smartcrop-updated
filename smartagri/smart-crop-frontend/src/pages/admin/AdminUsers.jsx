@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { API_BASE } from "../../api/axios";
 
 export default function AdminUsers() {
 
   // ================= API BASE =================
-  const API = "http://localhost:8080/api/admin";
+  const API = `${API_BASE}/admin`;
 
   // ================= STATE =================
   const [users, setUsers] = useState([]);

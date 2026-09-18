@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { API_BASE } from "../../api/axios";
 
 // 📊 Charts
 import {
@@ -19,7 +20,7 @@ import {
 
 export default function AdminFarms() {
 
-  const API = "http://localhost:8080/api/admin/farms";
+  const API = `${API_BASE}/admin/farms`;
 
   const [farms, setFarms] = useState([]);
   const [search, setSearch] = useState("");
