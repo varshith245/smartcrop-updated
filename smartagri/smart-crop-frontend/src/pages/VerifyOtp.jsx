@@ -15,35 +15,25 @@ export default function VerifyOtp() {
 
     try {
       await verifyOtp({ email, otp });
-      alert("Account verified successfully! Please log in to continue.");
-      navigate("/login");
+      alert("Account verified");
+      navigate("/");
     } catch (err) {
-      alert("Invalid OTP or expired. Please check your email.");
+      alert("Invalid OTP");
     }
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-container">
-        <h2>Verify OTP 📬</h2>
-        {email && (
-          <p className="auth-subtitle">
-            Enter the 6-digit code sent to <strong>{email}</strong>
-          </p>
-        )}
+    <div className="auth-container">
+      <h2>Verify OTP</h2>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Enter 6-digit OTP"
-            maxLength={6}
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            required
-          />
+      <form onSubmit={handleSubmit}>
+        <input
+          placeholder="Enter OTP"
+          onChange={(e) => setOtp(e.target.value)}
+        />
 
-          <button type="submit">Verify & Activate</button>
-        </form>
-      </div>
+        <button type="submit">Verify</button>
+      </form>
     </div>
   );
 }

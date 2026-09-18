@@ -1,10 +1,11 @@
 // src/api/auth.api.js
 
 import axios from "axios";
-import { API_BASE } from "./axios";
 
 const API = axios.create({
-  baseURL: `${API_BASE}/auth`,
+  baseURL: (typeof window !== "undefined" && import.meta.env.VITE_API_BASE_URL)
+    ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/$/, "")}/auth`
+    : "http://localhost:8080/api/auth",
   headers: {
     "Content-Type": "application/json"
   }
